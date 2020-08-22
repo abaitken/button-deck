@@ -5,10 +5,6 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtonDeckClient", "ButtonDeckClient\ButtonDeckClient.csproj", "{03D56E50-87CE-49CA-B815-9B83BC1B3CE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtonDeckClient.SerialComm", "ButtonDeckClient.SerialComm\ButtonDeckClient.SerialComm.csproj", "{82F82F33-3BAF-45B0-9C95-46A9C767A9B9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtonDeckClient.OBS", "ButtonDeckClient.OBS\ButtonDeckClient.OBS.csproj", "{957EB9B8-E652-4875-8734-70E9F44C99B6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{03D56E50-87CE-49CA-B815-9B83BC1B3CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03D56E50-87CE-49CA-B815-9B83BC1B3CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03D56E50-87CE-49CA-B815-9B83BC1B3CE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82F82F33-3BAF-45B0-9C95-46A9C767A9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82F82F33-3BAF-45B0-9C95-46A9C767A9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82F82F33-3BAF-45B0-9C95-46A9C767A9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82F82F33-3BAF-45B0-9C95-46A9C767A9B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{957EB9B8-E652-4875-8734-70E9F44C99B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{957EB9B8-E652-4875-8734-70E9F44C99B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{957EB9B8-E652-4875-8734-70E9F44C99B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{957EB9B8-E652-4875-8734-70E9F44C99B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

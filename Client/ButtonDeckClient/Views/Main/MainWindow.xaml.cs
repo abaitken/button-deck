@@ -13,16 +13,30 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ButtonDeckClient
+namespace ButtonDeckClient.Views.Main
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    internal partial class MainWindow : Window
     {
         public MainWindow()
         {
+            Loaded += MainWindow_Loaded;
+            ViewModel = new MainViewModel();
             InitializeComponent();
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= MainWindow_Loaded;
+            ViewModel.LoadedOnce();
+        }
+
+        public MainViewModel ViewModel
+        {
+            get { return (MainViewModel)DataContext; }
+            set { DataContext = value; }
         }
     }
 }

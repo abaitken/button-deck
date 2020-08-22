@@ -1,54 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
-namespace ButtonDeckClient.SerialComm
+namespace ButtonDeckClient.Logging
 {
-    public class CommandReceiver : IDisposable
+    internal class FileLogger : ILogger
     {
-        public CommandReceiver(string portName)
+        private readonly StreamWriter _writer;
+        public FileLogger(string filename)
         {
-            _serialPort = new SerialPort
-            {
-                PortName = portName,
-                BaudRate = 9600
-            };
-            _serialPort.DataReceived += _serialPort_DataReceived;
-            _serialPort.Open();
-
+            _writer = new StreamWriter(filename);
         }
 
-        private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        public void WriteLine(string message)
         {
-            // TODO
-            //var x = _serialPort.ReadExisting();?
+            _writer.WriteLine(message);
         }
 
         #region IDisposable Support
-        private bool _disposedValue = false; // To detect redundant calls
-        private readonly SerialPort _serialPort;
+        private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposedValue)
+            if (!disposedValue)
             {
                 if (disposing)
                 {
-                    _serialPort.Dispose();
+                    _writer.Flush();
+                    _writer.Close();
+                    _writer.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
                 // TODO: set large fields to null.
 
-                _disposedValue = true;
+                disposedValue = true;
             }
         }
 
         // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~CommandReceiver() {
+        // ~FileLogger() {
         //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
         //   Dispose(false);
         // }
