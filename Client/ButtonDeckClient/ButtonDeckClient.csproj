@@ -138,7 +138,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\ActionCommandModel.cs" />
+    <Compile Include="Views\ActionCommandModelT.cs" />
+    <Compile Include="Views\CommandModel.cs" />
+    <Compile Include="Views\CommandModelT.cs" />
+    <Compile Include="Views\EmptyCommandModel.cs" />
+    <Compile Include="Views\ICommandModel.cs" />
+    <Compile Include="Views\Main\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Main\SerialPortMenuItem.cs" />
     <Compile Include="Views\PropertyChangedViewModel.cs" />
+    <Compile Include="Views\ReadOnlyViewModelProperty.cs" />
     <Compile Include="Views\ViewModelProperty.cs" />
     <Page Include="Views\Main\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -159,6 +170,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Main\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
