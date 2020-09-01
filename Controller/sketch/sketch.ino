@@ -1,26 +1,19 @@
-//https://www.arduino.cc/en/Reference/PortManipulation
-//https://tronixstuff.com/2011/10/22/tutorial-arduino-port-manipulation/
+#include "constants.h"
+#include "shared.h"
+#include "buttons.h"
+#include "lighting.h"
+#include "communication.h"
 
-byte g_previousPortD;
-byte g_currentPortD;
-
-void setup() {
-	Serial.begin(9600);
-	// Set as input by default
-	//DDRD = B00000000; // set PORTD (digital 7~0) to inputs
-	
-	// TODO : Negotiate with host? Set serial speed and delay?
+void setup()
+{
+    SetupLighting();
+    SetupButtons();
+    SetupCommunications();
 }
 
-void loop() {
-	
-	g_currentPortD = PIND;
-	
-	if(g_currentPortD != g_previousPortD)
-	{
-		g_previousPortD = g_currentPortD;
-		Serial.println(g_currentPortD);
-	}
-	
-	delay(200);
+void loop()
+{
+    CheckButtonStates();
+    if(!ProcessSerialMessages())
+        delay(5); // TODO : Is this required? Concerned about overheating?
 }
