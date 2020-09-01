@@ -1,5 +1,7 @@
 # Serial Message Formats
 
+This page documents the data format for messages that are sent between the arduino and the PC.
+
 ## Basic Format
 
 All messages follow a similar header. Two zeros (00) followed by a byte which indicates the message type, followed by a number of bytes specific to the message.
