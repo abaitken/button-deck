@@ -3,12 +3,17 @@
 #include "buttons.h"
 #include "lighting.h"
 #include "communication.h"
+#include "storage.h"
 
 void setup()
 {
     SetupLighting();
     SetupButtons();
+    SetupStorage();
     SetupCommunications();
+
+    SetLEDState(0, CRGB::Green);
+    CommitLEDStates();
 }
 
 void loop()

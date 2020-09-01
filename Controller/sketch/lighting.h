@@ -1,5 +1,3 @@
-#include <EEPROM.h>
-
 CRGB g_ledStates[NUM_LEDS];
 
 void SetLEDState(int index, CRGB color)
@@ -14,14 +12,14 @@ void CommitLEDStates()
 
 byte GetBrightness()
 {
-    // TODO : Implement checksums: https://forum.arduino.cc/index.php?topic=578012.0
-    return EEPROM.read(STORE_BRIGHTNESS);
+    return g_data.brightness;
 }
 
 void SetBrightness(byte value)
 {
-    EEPROM.write(STORE_BRIGHTNESS, value);
+    g_data.brightness = value;
     FastLED.setBrightness(value);
+    SaveData();
 }
 
 void SetupLighting()

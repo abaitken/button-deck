@@ -12,5 +12,13 @@ byte GetBrightness();
 void SetBrightness(byte value);
 
 // EEPROM
-#define STORE_BRIGHTNESS       0
-#define STORE_NEXT             STORE_BRIGHTNESS + sizeof(int)
+struct PersistantData
+{
+    byte brightness;
+};
+
+PersistantData g_data = {
+    255
+};
+
+void SaveData();
