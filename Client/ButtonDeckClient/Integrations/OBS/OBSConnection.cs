@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ButtonDeckClient.OBS
+namespace ButtonDeckClient.Integrations.OBS
 {
-    public class Class1
+    public class OBSConnection
     {
-        public Class1()
+        public OBSConnection()
         {
             var obs = new ObsWebSocket();
             var obsApi = new ObsWebSocketApi(obs);
