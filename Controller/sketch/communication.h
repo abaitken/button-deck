@@ -3,7 +3,8 @@ int g_readByte;
 void SetupCommunications()
 {
     Serial.begin(BAUD_RATE);
-    while (!Serial) {
+    while (!Serial)
+    {
         ; // wait for serial port to connect. Needed for native USB port only
     }
 
@@ -120,7 +121,9 @@ void ProcessMessage()
         g_readByte = Serial.read();
         SendToggleState(g_readByte);
         break;
-
+    case MESSAGE_VERSION:
+        SendSerialMessage(MESSAGE_VERSION, VERSION);
+        break;
     default:
         FlushSerial();
         SendSerialMessage(MESSAGE_INVALID, 0);

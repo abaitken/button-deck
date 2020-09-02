@@ -9,6 +9,7 @@ byte g_buttonColumnPins[] = {7, 8, 9, 10, 11};
 byte g_togglePins[] = { A7, A6, A5, A4, A3 };
 
 // Comms
+#define VERSION   1
 #define BAUD_RATE 9600
 
 #define MESSAGE_INVALID         1
@@ -18,3 +19,5 @@ byte g_togglePins[] = { A7, A6, A5, A4, A3 };
 #define MESSAGE_TOGGLE_STATE    MESSAGE_BUTTON_UP      + 1
 #define MESSAGE_LED_BRIGHTNESS  MESSAGE_TOGGLE_STATE   + 1
 #define MESSAGE_LED_COLOR       MESSAGE_LED_BRIGHTNESS + 1
+#define MESSAGE_VERSION         MESSAGE_LED_COLOR + 1
+#define MESSAGE_NEXT            MESSAGE_VERSION + 1

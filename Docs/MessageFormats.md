@@ -135,4 +135,17 @@ For example:
  - 3 update LED index 3 with
  - 000 which is RGB values R0 G0 B0
 
- 
+
+### Get Version (MESSAGE_VERSION)
+
+Get the version number of the software running on the Arduino.
+
+#### Format
+
+Send a standard header.
+
+```00 MESSAGE_VERSION```
+
+The arduino will respond with a message in similar format where the value represents the version:
+
+```00 MESSAGE_VERSION version```
