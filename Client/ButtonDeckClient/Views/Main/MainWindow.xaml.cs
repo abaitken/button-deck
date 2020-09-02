@@ -23,8 +23,20 @@ namespace ButtonDeckClient.Views.Main
         public MainWindow()
         {
             Loaded += MainWindow_Loaded;
+            Closing += MainWindow_Closing;
+            Closed += MainWindow_Closed;
             ViewModel = new MainViewModel();
             InitializeComponent();
+        }
+
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            ViewModel.Closed();
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ViewModel.Closing(e);
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

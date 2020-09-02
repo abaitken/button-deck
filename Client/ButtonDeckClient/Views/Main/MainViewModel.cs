@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ButtonDeckClient.Arduino;
+using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace ButtonDeckClient.Views.Main
         public ViewModelProperty<IEnumerable<string>> SerialPorts { get; private set; }
         public ReadOnlyViewModelProperty<List<SerialPortMenuItem>> SerialPortMenuItems { get; private set; }
         public ViewModelProperty<string> CurrentSerialPort { get; private set; }
+        private SerialMonitor SerialMonitor { get; }
+        private ISettings Settings => Properties.Settings.Default;
 
         public MainViewModel()
         {
@@ -29,19 +32,32 @@ namespace ButtonDeckClient.Views.Main
 
                 return items;
             });
+            SerialMonitor = new SerialMonitor();
+        }
 
+        internal void Closed()
+        {
+            Settings.Save();
+        }
+
+        internal void Closing(System.ComponentModel.CancelEventArgs e)
+        {
         }
 
         private void ConnectToArduino()
         {
             // TODO : Disconnect from previous?
             // TODO : Connect to new
+            Settings.PreviousCOMPort = CurrentSerialPort.Value;
         }
 
         public void LoadedOnce()
         {
-            SerialPorts.Value = SerialPort.GetPortNames();
-            // TODO : Get previous COM port and connect to it
+            // TODO : Detect if previously crashed, if so, ask to reset all settings
+            SerialPorts.Value = SerialMonitor.PortNames;
+
+            if (SerialPorts.Value.Contains(Settings.PreviousCOMPort))
+                CurrentSerialPort.Value = Settings.PreviousCOMPort;
         }
     }
 }

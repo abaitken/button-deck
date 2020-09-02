@@ -142,8 +142,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationInformation.cs" />
+    <Compile Include="Arduino\SerialMonitor.cs" />
     <Compile Include="Integrations\OBS\OBSConnection.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Views\ActionCommandModel.cs" />
     <Compile Include="Views\ActionCommandModelT.cs" />
     <Compile Include="Views\CommandModel.cs" />
