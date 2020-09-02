@@ -124,6 +124,10 @@ void ProcessMessage()
     case MESSAGE_VERSION:
         SendSerialMessage(MESSAGE_VERSION, VERSION);
         break;
+    case MESSAGE_HEARTBEAT:
+        g_readByte = Serial.read();
+        SendSerialMessage(MESSAGE_HEARTBEAT, g_readByte);
+        break;
     default:
         FlushSerial();
         SendSerialMessage(MESSAGE_INVALID, 0);

@@ -149,3 +149,18 @@ Send a standard header.
 The arduino will respond with a message in similar format where the value represents the version:
 
 ```00 MESSAGE_VERSION version```
+
+
+### Heartbeat (MESSAGE_HEARTBEAT)
+
+Simple heartbeat type message that replies with the same byte value given.
+
+#### Format
+
+Send a standard header with a byte.
+
+```00 MESSAGE_HEARTBEAT value```
+
+The arduino will respond with a message in similar format where the value represents the given value:
+
+```00 MESSAGE_HEARTBEAT value```
