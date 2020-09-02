@@ -142,6 +142,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationInformation.cs" />
+    <Compile Include="Arduino\MessageBuilder.cs" />
+    <Compile Include="Arduino\MessageHandler.cs" />
+    <Compile Include="Arduino\Messages.cs" />
+    <Compile Include="Arduino\RGB.cs" />
     <Compile Include="Arduino\SerialMonitor.cs" />
     <Compile Include="Integrations\OBS\OBSConnection.cs" />
     <Compile Include="Program.cs" />

@@ -41,6 +41,7 @@ void SetupCommunications()
   }*/
 }
 
+// TODO : Fix the data to be an array/int
 void SendSerialMessage(byte identifier, byte data)
 {
     Serial.write(0);
