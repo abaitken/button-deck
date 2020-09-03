@@ -100,7 +100,7 @@ void ProcessMessage()
         // Change count
         count = Serial.read();
 
-        for (byte index = 0; index < count; index++)
+        for (; count > 0; count--)
         {
             ledIndex = Serial.read();
             r = Serial.read();
