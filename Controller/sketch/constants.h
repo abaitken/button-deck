@@ -6,7 +6,7 @@
 byte g_buttonRowPins[] = {2, 3, 4, 5, 6};
 byte g_buttonColumnPins[] = {7, 8, 9, 10, 11};
 
-byte g_togglePins[] = { A7, A6, A5, A4, A3 };
+byte g_togglePins[] = { A0, A1, A2, A3, A4 };
 
 // Comms
 #define VERSION   1
