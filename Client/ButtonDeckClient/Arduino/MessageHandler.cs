@@ -14,7 +14,7 @@ namespace ButtonDeckClient.Arduino
                 var headerPart2 = stream.ReadByte();
 
                 // TODO : Raise events
-                // TODO : Double check data types
+
                 var messageId = stream.ReadByte();
                 switch (messageId)
                 {

@@ -1,5 +1,6 @@
 // Communications
 void SendSerialMessage(byte identifier, byte data);
+void SendSerialMessage(byte identifier, byte data1, byte data2);
 
 // Buttons
 void SendToggleState(int pinIndex);

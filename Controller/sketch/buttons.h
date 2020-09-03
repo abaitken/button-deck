@@ -53,7 +53,7 @@ void SendToggleState(int pinIndex)
     if(pinIndex >= g_toggleCount)
         SendSerialMessage(MESSAGE_INVALID, 0);
     else
-        SendSerialMessage(MESSAGE_TOGGLE_STATE, word(pinIndex, g_togglePins[pinIndex]));
+        SendSerialMessage(MESSAGE_TOGGLE_STATE, pinIndex, g_togglePins[pinIndex]);
 }
 
 void CheckButtonStates()
@@ -77,9 +77,9 @@ void CheckButtonStates()
             if(g_buttonStates[columnPinIndex][rowPinIndex] != currentState)
             {
                 if(currentState)
-                    SendSerialMessage(MESSAGE_BUTTON_DOWN, word(columnPinIndex, rowPinIndex));
+                    SendSerialMessage(MESSAGE_BUTTON_DOWN, columnPinIndex, rowPinIndex);
                 else
-                    SendSerialMessage(MESSAGE_BUTTON_UP, word(columnPinIndex, rowPinIndex));
+                    SendSerialMessage(MESSAGE_BUTTON_UP, columnPinIndex, rowPinIndex);
             }
             g_buttonStates[columnPinIndex][rowPinIndex] = currentState;
         }

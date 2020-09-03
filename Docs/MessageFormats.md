@@ -52,9 +52,9 @@ A button is pressed.
 
 #### Format
 
-Standard header followed by a byte, where the high word is the button matrix column and the low word is the row.
+Standard header followed by two bytes, where the first is the button matrix column and the second is the row.
 
-```00 MESSAGE_BUTTON_DOWN column_word row_word```
+```00 MESSAGE_BUTTON_DOWN column row```
 
 
 ### Button up (MESSAGE_BUTTON_UP)
@@ -63,9 +63,9 @@ A button is no longer pressed.
 
 #### Format
 
-Standard header followed by a byte, where the high word is the button matrix column and the low word is the row.
+Standard header followed by two bytes, where the first is the button matrix column and the second is the row.
 
-```00 MESSAGE_BUTTON_UP column_word row_word```
+```00 MESSAGE_BUTTON_UP column row```
 
 
 ### Toggle state (MESSAGE_TOGGLE_STATE)
@@ -76,9 +76,9 @@ The toggle state can be requested by sending a message with the requested toggle
 
 #### Report status format
 
-Standard header followed by a byte, where the high word is the toggle index and the low word is the button state, on or off (1 or 0).
+Standard header followed by two bytes, where the first is the toggle index and the second is the button state, on or off (1 or 0).
 
-```00 MESSAGE_TOGGLE_STATE index_word state_word```
+```00 MESSAGE_TOGGLE_STATE index state```
 
 #### Request status format
 

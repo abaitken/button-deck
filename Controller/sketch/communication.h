@@ -1,4 +1,4 @@
-int g_readByte;
+byte g_readByte;
 
 void SetupCommunications()
 {
@@ -41,13 +41,22 @@ void SetupCommunications()
   }*/
 }
 
-// TODO : Fix the data to be an array/int
+// TODO : Fix the data to be an array?
 void SendSerialMessage(byte identifier, byte data)
 {
     Serial.write(0);
     Serial.write(0);
     Serial.write(identifier);
     Serial.write(data);
+}
+
+void SendSerialMessage(byte identifier, byte data1, byte data2)
+{
+    Serial.write(0);
+    Serial.write(0);
+    Serial.write(identifier);
+    Serial.write(data1);
+    Serial.write(data2);
 }
 
 void FlushSerial()
@@ -84,14 +93,14 @@ void ProcessMessage()
     // Read message header
     g_readByte = Serial.read();
 
-    int count, ledIndex, r, g, b;
+    byte count, ledIndex, r, g, b;
     switch (g_readByte)
     {
     case MESSAGE_LED_COLOR:
         // Change count
         count = Serial.read();
 
-        for (int index = 0; index < count; index++)
+        for (byte index = 0; index < count; index++)
         {
             ledIndex = Serial.read();
             r = Serial.read();
