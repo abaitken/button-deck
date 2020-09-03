@@ -135,6 +135,9 @@ For example:
  - 3 update LED index 3 with
  - 000 which is RGB values R0 G0 B0
 
+#### Notes
+
+Index 0 which is the panel status light cannot be set.
 
 ### Get Version (MESSAGE_VERSION)
 
