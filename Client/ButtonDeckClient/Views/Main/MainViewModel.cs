@@ -1,4 +1,5 @@
 ﻿using ButtonDeckClient.Arduino;
+using ButtonDeckClient.Views.ButtonDeckTest;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -15,6 +16,7 @@ namespace ButtonDeckClient.Views.Main
         public ViewModelProperty<string> CurrentSerialPort { get; private set; }
         private SerialMonitor SerialMonitor { get; }
         private ISettings Settings => Properties.Settings.Default;
+        public ICommandModel TestButtonDeckCommand { get; }
 
         public MainViewModel()
         {
@@ -33,6 +35,17 @@ namespace ButtonDeckClient.Views.Main
                 return items;
             });
             SerialMonitor = new SerialMonitor();
+            TestButtonDeckCommand = new ActionCommandModel(() => !string.IsNullOrEmpty(CurrentSerialPort.Value), OnTestButtonDeck);
+        }
+
+        private void OnTestButtonDeck()
+        {
+            if (string.IsNullOrWhiteSpace(CurrentSerialPort.Value))
+                return;
+            
+            var window = new ButtonDeckTestWindow();
+            window.ViewModel.Connect(CurrentSerialPort.Value);
+            window.ShowDialog();
         }
 
         internal void Closed()
@@ -49,6 +62,7 @@ namespace ButtonDeckClient.Views.Main
             // TODO : Disconnect from previous?
             // TODO : Connect to new
             Settings.PreviousCOMPort = CurrentSerialPort.Value;
+            TestButtonDeckCommand?.Update();
         }
 
         public void LoadedOnce()

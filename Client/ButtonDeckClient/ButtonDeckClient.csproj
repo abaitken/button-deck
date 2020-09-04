@@ -157,6 +157,10 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Views\ActionCommandModel.cs" />
     <Compile Include="Views\ActionCommandModelT.cs" />
+    <Compile Include="Views\ButtonDeckTest\ButtonDeckTestViewModel.cs" />
+    <Compile Include="Views\ButtonDeckTest\ButtonDeckTestWindow.xaml.cs">
+      <DependentUpon>ButtonDeckTestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CommandModel.cs" />
     <Compile Include="Views\CommandModelT.cs" />
     <Compile Include="Views\EmptyCommandModel.cs" />
@@ -168,6 +172,10 @@
     <Compile Include="Views\PropertyChangedViewModel.cs" />
     <Compile Include="Views\ReadOnlyViewModelProperty.cs" />
     <Compile Include="Views\ViewModelProperty.cs" />
+    <Page Include="Views\ButtonDeckTest\ButtonDeckTestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Main\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

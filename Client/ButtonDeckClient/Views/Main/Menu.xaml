@@ -22,4 +22,7 @@
         </MenuItem>
         <MenuItem Header="OBS..."></MenuItem>
     </MenuItem>
+    <MenuItem Header="Debug">
+        <MenuItem Header="Button Deck" Command="{Binding TestButtonDeckCommand.Command}" />
+    </MenuItem>
 </Menu>
