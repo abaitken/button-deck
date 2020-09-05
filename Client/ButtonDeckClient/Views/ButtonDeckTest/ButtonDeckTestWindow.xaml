@@ -7,50 +7,49 @@
         xmlns:local="clr-namespace:ButtonDeckClient.Views.ButtonDeckTest"
         mc:Ignorable="d"
         Title="Button Deck Debugger" Height="450" Width="800">
+    <Window.Resources>
+        <local:ExpandedValueConverter x:Key="ExpandedConverter"/>
+        <local:NotBooleanConverter x:Key="NotBooleanConverter"/>
+        <local:ColorToBrushConverter x:Key="ColorToBrush"/>
+    </Window.Resources>
     <DockPanel>
-        <Grid DockPanel.Dock="Right">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            
-            <!-- ROW 0 -->
-            <RadioButton Content="Heartbeat"/>
-            <Label Content="Value" Grid.Column="1" Grid.ColumnSpan="1"/>
-            <TextBox Grid.Column="3" Grid.ColumnSpan="2" />
-            
-            <!-- ROW 1 -->
-            <RadioButton Content="Set LED Brightness" Grid.Row="1"/>
-            <Slider Minimum="1" Maximum="255" Grid.Row="1" Grid.Column="1"/>
-            
-            <!-- ROW 2 -->
-            <RadioButton Content="Get LED Brightness" Grid.Row="2"/>
-            
-            <!-- ROW 3 -->
-            <RadioButton Content="Get Toggle State" Grid.Row="3" />
-            <Label Content="Toggle Index" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
-            <ComboBox Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" />
-            
-            <!-- ROW 4 -->
-            <RadioButton Content="Set LED Color" Grid.Row="4"/>
-            <Label Content="LED Index" Grid.Row="4" Grid.Column="1"/>
-            <ComboBox Grid.Row="4" Grid.Column="2" />
-            <Label Content="Color" Grid.Row="4" Grid.Column="3"/>
-            <!-- TODO : Color -->
-            
-            <!-- ROW 5 -->
-            <Button Command="{Binding Send.Command}" Content="Send" Grid.Row="5" Grid.ColumnSpan="5"/>
-        </Grid>
+        <StackPanel DockPanel.Dock="Right">
+
+            <Expander Header="Heartbeat" IsExpanded="{Binding ActionType.Value,Converter={StaticResource ExpandedConverter}, ConverterParameter={x:Static local:ActionTypes.Heartbeat}}">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Value:" />
+                    <TextBox Text="{Binding HeartbeatValue.Value}" />
+                </StackPanel>
+            </Expander>
+
+            <Expander Header="LED Brightness" IsExpanded="{Binding ActionType.Value,Converter={StaticResource ExpandedConverter}, ConverterParameter={x:Static local:ActionTypes.LEDBrightness}}">
+                <StackPanel Orientation="Vertical">
+                    <CheckBox Content="Get" IsChecked="{Binding LEDBrightnessGet.Value}" x:Name="LEDBrightness"/>
+                    <Slider Minimum="1" Maximum="255" Value="{Binding LEDBrightness.Value}" IsEnabled="{Binding IsChecked, ElementName=LEDBrightness, Converter={StaticResource NotBooleanConverter}}"/>
+                </StackPanel>
+            </Expander>
+
+            <Expander Header="Toggle State" IsExpanded="{Binding ActionType.Value,Converter={StaticResource ExpandedConverter}, ConverterParameter={x:Static local:ActionTypes.ToggleState}}">
+                <StackPanel>
+                    <Label Content="Toggle Index:" />
+                    <ComboBox ItemsSource="{Binding Toggles}" SelectedValue="{Binding SelectedToggle.Value}" />
+                </StackPanel>
+            </Expander>
+
+            <Expander Header="LED Color" IsExpanded="{Binding ActionType.Value,Converter={StaticResource ExpandedConverter}, ConverterParameter={x:Static local:ActionTypes.LEDColor}}">
+                <StackPanel>
+                    <CheckBox Content="All" IsChecked="{Binding AllLEDs.Value}" x:Name="AllLEDs"/>
+
+                    <Label Content="LED Index:" IsEnabled="{Binding IsChecked, ElementName=AllLEDs, Converter={StaticResource NotBooleanConverter}}" />
+                    <ComboBox ItemsSource="{Binding LEDs}" SelectedValue="{Binding SelectedLED.Value}" IsEnabled="{Binding IsChecked, ElementName=AllLEDs, Converter={StaticResource NotBooleanConverter}}" />
+                    <Label Content="Color:" />
+                    <Button Content="..." Command="{Binding SelectColor.Command}" Background="{Binding LEDColor.Value,Converter={StaticResource ColorToBrush}}"/>
+
+                </StackPanel>
+            </Expander>
+
+            <Button Command="{Binding Send.Command}" Content="Send" />
+        </StackPanel>
 
         <ListBox ItemsSource="{Binding Messages}" />
     </DockPanel>

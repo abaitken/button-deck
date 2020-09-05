@@ -55,6 +55,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
       <Private>True</Private>
@@ -120,6 +121,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -157,10 +159,14 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Views\ActionCommandModel.cs" />
     <Compile Include="Views\ActionCommandModelT.cs" />
+    <Compile Include="Views\ButtonDeckTest\ActionTypes.cs" />
     <Compile Include="Views\ButtonDeckTest\ButtonDeckTestViewModel.cs" />
     <Compile Include="Views\ButtonDeckTest\ButtonDeckTestWindow.xaml.cs">
       <DependentUpon>ButtonDeckTestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ButtonDeckTest\ColorToBrushConverter.cs" />
+    <Compile Include="Views\ButtonDeckTest\ExpandedValueConverter.cs" />
+    <Compile Include="Views\ButtonDeckTest\NotBooleanConverter.cs" />
     <Compile Include="Views\CommandModel.cs" />
     <Compile Include="Views\CommandModelT.cs" />
     <Compile Include="Views\EmptyCommandModel.cs" />

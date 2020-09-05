@@ -9,7 +9,8 @@ namespace ButtonDeckClient.Arduino
 {
     class SerialMonitor
     {
-        public string[] PortNames => SerialPort.GetPortNames();
+        //public string[] PortNames => SerialPort.GetPortNames();
+        public string[] PortNames => new[] { "TEST" };
 
         // TODO : Raise event when new ports are added
         // TODO : Raise event when ports are removed
