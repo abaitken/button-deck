@@ -6,10 +6,10 @@ namespace ButtonDeckClient.Arduino
     {
         public LEDBrightnessEventArgs(int brightness)
         {
-            Brightness = brightness;
+            Value = brightness;
         }
 
-        public int Brightness { get; }
+        public int Value { get; }
     }
 
 }

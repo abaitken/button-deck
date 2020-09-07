@@ -143,9 +143,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActionRouter.cs" />
     <Compile Include="ApplicationInformation.cs" />
     <Compile Include="Arduino\ButtonEventArgs.cs" />
+    <Compile Include="Arduino\ButtonDeckCommunication.cs" />
+    <Compile Include="Arduino\ColorExtensions.cs" />
     <Compile Include="Arduino\HeartbeatEventArgs.cs" />
+    <Compile Include="Arduino\IntegerExtensions.cs" />
     <Compile Include="Arduino\LEDBrightnessEventArgs.cs" />
     <Compile Include="Arduino\MessageBuilder.cs" />
     <Compile Include="Arduino\MessageHandler.cs" />
@@ -154,7 +158,14 @@
     <Compile Include="Arduino\SerialMonitor.cs" />
     <Compile Include="Arduino\ToggleStateChangeEventArgs.cs" />
     <Compile Include="Arduino\VersionEventArgs.cs" />
+    <Compile Include="ButtonDeckInformation.cs" />
     <Compile Include="Integrations\OBS\OBSConnection.cs" />
+    <Compile Include="Logging\EmptyLogger.cs" />
+    <Compile Include="Logging\FormattingLogger.cs" />
+    <Compile Include="Logging\LogEventArgs.cs" />
+    <Compile Include="Logging\LoggerFactory.cs" />
+    <Compile Include="Logging\LogListener.cs" />
+    <Compile Include="Logging\MultiLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Views\ActionCommandModel.cs" />
@@ -190,8 +201,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Arduino\CommandReceiver.cs" />
-    <Compile Include="Arduino\ICommandReciever.cs" />
+    <Compile Include="Arduino\SerialConnection.cs" />
     <Compile Include="Logging\CategoryLogger.cs" />
     <Compile Include="Logging\FileLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />

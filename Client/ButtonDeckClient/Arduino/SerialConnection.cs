@@ -1,46 +1,71 @@
 ﻿using ButtonDeckClient.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ButtonDeckClient.Arduino
 {
-    public class CommandReceiver : ICommandReciever
+    internal class SerialConnection
     {
         private readonly SerialPort _serialPort;
         private readonly ILogger _logger;
+        private readonly MessageHandler _messageHandler;
 
-        public CommandReceiver(ILogger logger, string portName)
+        public SerialConnection(ILogger logger, string portName, MessageHandler messageHandler)
         {
             _serialPort = new SerialPort
             {
                 PortName = portName,
-                BaudRate = 9600
+                BaudRate = 9600,
+                Parity = Parity.None,
+                DataBits = 8,
+                StopBits = StopBits.One,
+                Encoding = Encoding.ASCII
             };
-            _logger = new CategoryLogger(nameof(CommandReceiver), logger);
+            _logger = CategoryLogger.Create(nameof(SerialConnection), logger);
+            _messageHandler = messageHandler;
         }
 
-        private void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            // TODO
-            //var x = _serialPort.ReadExisting();?
-        }
-
-        public void Connect()
+        public void Open()
         {
             _logger.WriteLine($"Connecting to serial port '{_serialPort.PortName}' at baud rate '{_serialPort.BaudRate}'");
-            _serialPort.DataReceived += _serialPort_DataReceived;
-            _serialPort.Open();
+            _serialPort.Open(); // TODO : Handle errors
             _logger.WriteLine($"Connected.");
-            // TODO : Negotiate?
+            BeginRead();
         }
 
-        public void Disconnect()
+        private void BeginRead()
         {
+            Task.Factory.StartNew(() =>
+            {
+                _serialPort.ReadTimeout = int.MaxValue - 1;
+                while (_serialPort.IsOpen)
+                {
+                    try
+                    {
+                        _messageHandler.ProcessMessage(_serialPort.BaseStream);
+                    }
+                    catch (IOException e)
+                    {
+                    }
+                    Thread.Sleep(1);
+                }
+            }, TaskCreationOptions.LongRunning);
+        }
 
+        public void Close()
+        {
+            _serialPort.Close();
+        }
+
+        public void Send(byte[] data)
+        {
+            _serialPort.Write(data, 0, data.Length);
         }
 
         #region IDisposable Support

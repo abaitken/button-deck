@@ -1,4 +1,5 @@
 ﻿using ButtonDeckClient.Arduino;
+using ButtonDeckClient.Logging;
 using ButtonDeckClient.Views.ButtonDeckTest;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,10 @@ namespace ButtonDeckClient.Views.Main
         private SerialMonitor SerialMonitor { get; }
         private ISettings Settings => Properties.Settings.Default;
         public ICommandModel TestButtonDeckCommand { get; }
+        public LogListener LogListener { get; }
+        private ILogger RootLogger { get; }
+        private ButtonDeckCommunication Communication { get; }
+        private ActionRouter ActionRouter { get; set; }
 
         public MainViewModel()
         {
@@ -36,6 +41,10 @@ namespace ButtonDeckClient.Views.Main
             });
             SerialMonitor = new SerialMonitor();
             TestButtonDeckCommand = new ActionCommandModel(() => !string.IsNullOrEmpty(CurrentSerialPort.Value), OnTestButtonDeck);
+
+            LogListener = new LogListener();
+            RootLogger = new LoggerFactory().Create(LogListener);
+            Communication = new ButtonDeckCommunication(RootLogger);
         }
 
         private void OnTestButtonDeck()
@@ -43,9 +52,11 @@ namespace ButtonDeckClient.Views.Main
             if (string.IsNullOrWhiteSpace(CurrentSerialPort.Value))
                 return;
             
+            ActionRouter = null;
             var window = new ButtonDeckTestWindow();
-            window.ViewModel.Connect(CurrentSerialPort.Value);
+            window.ViewModel.Connect(Communication);
             window.ShowDialog();
+            HandleActions();
         }
 
         internal void Closed()
@@ -59,8 +70,10 @@ namespace ButtonDeckClient.Views.Main
 
         private void ConnectToArduino()
         {
-            // TODO : Disconnect from previous?
-            // TODO : Connect to new
+            if (Communication.IsConnected)
+                Communication.Disconnect();
+
+            Communication.Connect(CurrentSerialPort.Value);
             Settings.PreviousCOMPort = CurrentSerialPort.Value;
             TestButtonDeckCommand?.Update();
         }
@@ -70,8 +83,16 @@ namespace ButtonDeckClient.Views.Main
             // TODO : Detect if previously crashed, if so, ask to reset all settings
             SerialPorts.Value = SerialMonitor.PortNames;
 
+            // TODO : Report if connection cannot be made
             if (SerialPorts.Value.Contains(Settings.PreviousCOMPort))
                 CurrentSerialPort.Value = Settings.PreviousCOMPort;
+
+            HandleActions();
+        }
+
+        private void HandleActions()
+        {
+            ActionRouter = new ActionRouter(RootLogger, Communication);
         }
     }
 }

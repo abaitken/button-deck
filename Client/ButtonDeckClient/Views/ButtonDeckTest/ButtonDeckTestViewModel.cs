@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ButtonDeckClient.Arduino;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace ButtonDeckClient.Views.ButtonDeckTest
             {
                 Value = 255
             };
+            LEDBrightnessGet = new ViewModelProperty<bool>();
             SelectedToggle = new ViewModelProperty<int>();
             SelectedLED = new ViewModelProperty<int>
             {
@@ -66,12 +68,28 @@ namespace ButtonDeckClient.Views.ButtonDeckTest
                     // Do nothing
                     break;
                 case ActionTypes.Heartbeat:
+                    Messages.Add($"SEND: Heartbeat: value={HeartbeatValue.Value}");
+                    Communication.Heartbeat(HeartbeatValue.Value);
                     break;
                 case ActionTypes.LEDBrightness:
+                    if (LEDBrightnessGet.Value)
+                    {
+                        Messages.Add($"SEND: Get LED Brightness");
+                        Communication.RequestLedBrightness();
+                    }
+                    else
+                    {
+                        Messages.Add($"SEND: Set LED Brightness: value={LEDBrightness.Value}");
+                        Communication.SetLedBrightness(LEDBrightness.Value);
+                    }
                     break;
                 case ActionTypes.ToggleState:
+                    Messages.Add($"SEND: Get Toggle State: index={SelectedToggle.Value}");
+                    Communication.RequestToggleState(SelectedToggle.Value);
                     break;
                 case ActionTypes.LEDColor:
+                    Messages.Add($"SEND: Set LED Color: index={SelectedLED.Value};R={LEDColor.Value.R};G={LEDColor.Value.G};B={LEDColor.Value.B}");
+                    Communication.SetLedColor(SelectedLED.Value, LEDColor.Value.ToRGB());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(ActionType));
@@ -82,9 +100,60 @@ namespace ButtonDeckClient.Views.ButtonDeckTest
         {
         }
 
-        internal void Connect(string portName)
+        internal void Connect(ButtonDeckCommunication communication)
         {
+            Communication = communication;
+            Communication.ToggleStateChanged += Communication_ToggleStateChanged;
+            Communication.VersionResponse += Communication_VersionResponse;
+            Communication.HeartbeatResponse += Communication_HeartbeatResponse;
+            Communication.LEDBrightness += Communication_LEDBrightness;
+            Communication.ButtonUp += Communication_ButtonUp;
+            Communication.ButtonDown += Communication_ButtonDown;
+            Communication.InvalidResponse += Communication_InvalidResponse;
+            Communication.AcknowledgedResponse += Communication_AcknowledgedResponse;
         }
+
+        private void Communication_InvalidResponse(object sender, EventArgs e)
+        {
+            Messages.Add($"RECV: Invalid");
+        }
+
+        private void Communication_AcknowledgedResponse(object sender, EventArgs e)
+        {
+            Messages.Add($"RECV: Acknowledged");
+        }
+
+        private void Communication_ButtonDown(object sender, ButtonEventArgs e)
+        {
+            Messages.Add($"RECV: Button Down: column={e.Column};row={e.Row}");
+        }
+
+        private void Communication_ButtonUp(object sender, ButtonEventArgs e)
+        {
+            Messages.Add($"RECV: Button Up: column={e.Column};row={e.Row}");
+        }
+
+        private void Communication_LEDBrightness(object sender, LEDBrightnessEventArgs e)
+        {
+            Messages.Add($"RECV: LED Brightness: value={e.Value}");
+        }
+
+        private void Communication_HeartbeatResponse(object sender, HeartbeatEventArgs e)
+        {
+            Messages.Add($"RECV: Heartbeat: value={e.Value}");
+        }
+
+        private void Communication_VersionResponse(object sender, VersionEventArgs e)
+        {
+            Messages.Add($"RECV: Version: version={e.Version}");
+        }
+
+        private void Communication_ToggleStateChanged(object sender, ToggleStateChangeEventArgs e)
+        {
+            Messages.Add($"RECV: Toggle State Changed: index={e.Index};new state={e.NewState}");
+        }
+
+        private ButtonDeckCommunication Communication { get; set; }
 
         public ObservableCollection<string> Messages { get; }
     }

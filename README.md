@@ -4,9 +4,9 @@ This project contains the code and documentation for a custom button deck using 
 
 ## TODO
 
-- All: Implement client/controller connection and communication * IN PROGRESS
-- Client: Create test window/routines to ensure all inputs and outputs work
+- All: Implement client/controller connection and communication * DONE
+- Client: Create test window/routines to ensure all inputs and outputs work * IN PROGRESS
+- Client: Create event handler * IN PROGRESS
 - Client: Implement OBS web socket as executable actions
 - Client: Create action programmer
-- Client: Create event handler
 - All: Test
