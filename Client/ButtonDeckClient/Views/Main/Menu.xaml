@@ -20,9 +20,10 @@
                 </Style>
             </MenuItem.ItemContainerStyle>
         </MenuItem>
-        <MenuItem Header="OBS..."></MenuItem>
+        <!--<MenuItem Header="OBS..."></MenuItem>-->
     </MenuItem>
     <MenuItem Header="Debug">
-        <MenuItem Header="Button Deck" Command="{Binding TestButtonDeckCommand.Command}" />
+        <MenuItem Header="Button Deck..." Command="{Binding TestButtonDeckCommand.Command}" />
+        <MenuItem Header="Logging..." Command="{Binding LoggingCommand.Command}"/>
     </MenuItem>
 </Menu>

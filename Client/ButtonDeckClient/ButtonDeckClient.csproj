@@ -182,6 +182,10 @@
     <Compile Include="Views\CommandModelT.cs" />
     <Compile Include="Views\EmptyCommandModel.cs" />
     <Compile Include="Views\ICommandModel.cs" />
+    <Compile Include="Views\Logging\LoggingWindow.xaml.cs">
+      <DependentUpon>LoggingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Logging\LoggingWindowViewModel.cs" />
     <Compile Include="Views\Main\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -190,6 +194,10 @@
     <Compile Include="Views\ReadOnlyViewModelProperty.cs" />
     <Compile Include="Views\ViewModelProperty.cs" />
     <Page Include="Views\ButtonDeckTest\ButtonDeckTestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Logging\LoggingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

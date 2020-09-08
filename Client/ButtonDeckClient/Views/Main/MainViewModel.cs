@@ -1,6 +1,7 @@
 ﻿using ButtonDeckClient.Arduino;
 using ButtonDeckClient.Logging;
 using ButtonDeckClient.Views.ButtonDeckTest;
+using ButtonDeckClient.Views.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -18,12 +19,14 @@ namespace ButtonDeckClient.Views.Main
         private SerialMonitor SerialMonitor { get; }
         private ISettings Settings => Properties.Settings.Default;
         public ICommandModel TestButtonDeckCommand { get; }
+        public ICommandModel LoggingCommand { get; }
         public LogListener LogListener { get; }
         private ILogger RootLogger { get; }
         private ButtonDeckCommunication Communication { get; }
         private ActionRouter ActionRouter { get; set; }
+        private MainWindow MainWindow { get; }
 
-        public MainViewModel()
+        public MainViewModel(MainWindow mainWindow)
         {
             CurrentSerialPort = new ViewModelProperty<string>(ConnectToArduino);
             SerialPorts = new ViewModelProperty<IEnumerable<string>>();
@@ -41,10 +44,20 @@ namespace ButtonDeckClient.Views.Main
             });
             SerialMonitor = new SerialMonitor();
             TestButtonDeckCommand = new ActionCommandModel(() => !string.IsNullOrEmpty(CurrentSerialPort.Value), OnTestButtonDeck);
+            LoggingCommand = new ActionCommandModel(() => true, OnOpenLogging);
 
             LogListener = new LogListener();
             RootLogger = new LoggerFactory().Create(LogListener);
             Communication = new ButtonDeckCommunication(RootLogger);
+            MainWindow = mainWindow;
+        }
+
+        private void OnOpenLogging()
+        {
+            var window = new LoggingWindow();
+            window.ViewModel.Subscribe(LogListener);
+            window.Owner = MainWindow;
+            window.Show();
         }
 
         private void OnTestButtonDeck()
