@@ -159,7 +159,10 @@
     <Compile Include="Arduino\ToggleStateChangeEventArgs.cs" />
     <Compile Include="Arduino\VersionEventArgs.cs" />
     <Compile Include="ButtonDeckInformation.cs" />
+    <Compile Include="Integrations\BuiltIn\Delay.cs" />
     <Compile Include="Integrations\OBS\OBSConnection.cs" />
+    <Compile Include="Integrations\OBS\StartRecording.cs" />
+    <Compile Include="Integrations\OBS\StopRecording.cs" />
     <Compile Include="Logging\EmptyLogger.cs" />
     <Compile Include="Logging\FormattingLogger.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
@@ -193,6 +196,7 @@
     <Compile Include="Views\PropertyChangedViewModel.cs" />
     <Compile Include="Views\ReadOnlyViewModelProperty.cs" />
     <Compile Include="Views\ViewModelProperty.cs" />
+    <Compile Include="Workflows\Command.cs" />
     <Page Include="Views\ButtonDeckTest\ButtonDeckTestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
