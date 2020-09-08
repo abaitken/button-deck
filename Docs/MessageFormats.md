@@ -4,18 +4,18 @@ This page documents the data format for messages that are sent between the ardui
 
 ## Basic Format
 
-All messages follow a similar header. Two zeros (00) followed by a byte which indicates the message type, followed by a number of bytes specific to the message.
+All messages follow a similar header. Two header bytes 0xFF (255) 0xFA (250) followed by a byte which indicates the message type, followed by a number of bytes specific to the message.
 
 This documentation will use the following format to describe the messages:
 
-```00 MESSAGE_XYZ value```
+```0xFF 0xFA MESSAGE_XYZ value```
 
 This resprents consecutive bytes (without any spaces) containing the information. In the example above, this could be:
 
-```0012```
+```0xFF0xFA12```
 
 Where:
- - 00 is the indicator for a new message
+ - 0xFF 0xFA is the indicator for a new message
  - 1 is the message type
  - 2 is a value for that message
 
@@ -32,7 +32,7 @@ Sent from the arduino to indicate the last message/state was invalid.
 
 Standard header followed by an unused byte.
 
-```00 MESSAGE_INVALID 0```
+```0xFF 0xFA MESSAGE_INVALID 0```
 
 
 ### Acknowledged (MESSAGE_ACKNOWLEDGED)
@@ -43,7 +43,7 @@ Unused. Informs that the previous message was acknowledged.
 
 Standard header followed by an unused byte.
 
-```00 MESSAGE_ACKNOWLEDGED 0```
+```0xFF 0xFA MESSAGE_ACKNOWLEDGED 0```
 
 
 ### Button down (MESSAGE_BUTTON_DOWN)
@@ -54,7 +54,7 @@ A button is pressed.
 
 Standard header followed by two bytes, where the first is the button matrix column and the second is the row.
 
-```00 MESSAGE_BUTTON_DOWN column row```
+```0xFF 0xFA MESSAGE_BUTTON_DOWN column row```
 
 
 ### Button up (MESSAGE_BUTTON_UP)
@@ -65,7 +65,7 @@ A button is no longer pressed.
 
 Standard header followed by two bytes, where the first is the button matrix column and the second is the row.
 
-```00 MESSAGE_BUTTON_UP column row```
+```0xFF 0xFA MESSAGE_BUTTON_UP column row```
 
 
 ### Toggle state (MESSAGE_TOGGLE_STATE)
@@ -78,13 +78,13 @@ The toggle state can be requested by sending a message with the requested toggle
 
 Standard header followed by two bytes, where the first is the toggle index and the second is the button state, on or off (1 or 0).
 
-```00 MESSAGE_TOGGLE_STATE index state```
+```0xFF 0xFA MESSAGE_TOGGLE_STATE index state```
 
 #### Request status format
 
 Standard header followed by a byte, which the toggle index.
 
-```00 MESSAGE_TOGGLE_STATE index```
+```0xFF 0xFA MESSAGE_TOGGLE_STATE index```
 
 
 ### LED Brightness (MESSAGE_LED_BRIGHTNESS)
@@ -95,17 +95,17 @@ Get or set the LED brightness.
 
 Send a standard header followed by a byte, which is zero (0).
 
-```00 MESSAGE_LED_BRIGHTNESS 0```
+```0xFF 0xFA MESSAGE_LED_BRIGHTNESS 0```
 
 The arduino will respond with a message in similar format where the value represents the brightness:
 
-```00 MESSAGE_LED_BRIGHTNESS brightness```
+```0xFF 0xFA MESSAGE_LED_BRIGHTNESS brightness```
 
 #### Set brightness
 
 Send a standard header followed by a byte, which is a value between 1 and 255.
 
-```00 MESSAGE_LED_BRIGHTNESS brightness```
+```0xFF 0xFA MESSAGE_LED_BRIGHTNESS brightness```
 
 
 ### Set LED Color (MESSAGE_LED_COLOR)
@@ -117,16 +117,16 @@ Set the value of an LED.
 
 Standard header followed by a byte, which indicates the number of LEDs to change, followed by a repeating 4 bytes, where the first is the LED index followed by 3 bytes for RGB values (0-255).
 
-```00 MESSAGE_LED_COLOR count index r g b...```
+```0xFF 0xFA MESSAGE_LED_COLOR count index r g b...```
 
 For example:
 
-```00x3911165553000```
+```0xFF0xFAm3911165553000```
 
  (this example wont use double digit numbers to keep bytes and values aligned)
  
  - 00 standard header
- - x is the message type (MESSAGE_LED_COLOR)
+ - m is the message type (MESSAGE_LED_COLOR)
  - 3 number of LEDs to update
  - 9 update LED index 9 with
  - 111 are RGB values R1 G1 B1
@@ -147,11 +147,11 @@ Get the version number of the software running on the Arduino.
 
 Send a standard header.
 
-```00 MESSAGE_VERSION```
+```0xFF 0xFA MESSAGE_VERSION```
 
 The arduino will respond with a message in similar format where the value represents the version:
 
-```00 MESSAGE_VERSION version```
+```0xFF 0xFA MESSAGE_VERSION version```
 
 
 ### Heartbeat (MESSAGE_HEARTBEAT)
@@ -162,8 +162,8 @@ Simple heartbeat type message that replies with the same byte value given.
 
 Send a standard header with a byte.
 
-```00 MESSAGE_HEARTBEAT value```
+```0xFF 0xFA MESSAGE_HEARTBEAT value```
 
 The arduino will respond with a message in similar format where the value represents the given value:
 
-```00 MESSAGE_HEARTBEAT value```
+```0xFF 0xFA MESSAGE_HEARTBEAT value```
