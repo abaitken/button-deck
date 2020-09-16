@@ -7,20 +7,25 @@
              xmlns:local="clr-namespace:ButtonDeckClient.Views.Main"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <MenuItem Header="Connection">
-        <MenuItem Header="Arduino" ItemsSource="{Binding SerialPortMenuItems.Value}">            
-            <MenuItem.ItemContainerStyle>
-                <Style TargetType="MenuItem">
-                    <Setter Property="Header" Value="{Binding Name}" />
-                    <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-                    <Setter Property="IsCheckable" Value="True" />
+    <Menu.Resources>
+        <Style TargetType="MenuItem" x:Key="SelectableMenuItem">
+            <Setter Property="Header" Value="{Binding Name}" />
+            <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
+            <Setter Property="IsCheckable" Value="True" />
 
-                    <Setter Property="IsChecked" Value="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Setter Property="Command" Value="{Binding SetValueCommand.Command}" />
-                </Style>
-            </MenuItem.ItemContainerStyle>
-        </MenuItem>
+            <Setter Property="IsChecked" Value="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Setter Property="Command" Value="{Binding SetValueCommand.Command}" />
+        </Style>
+    </Menu.Resources>
+    <MenuItem Header="Connection">
+        <MenuItem Header="Arduino" ItemsSource="{Binding SerialPortMenuItems.Value}"
+                  ItemContainerStyle="{StaticResource SelectableMenuItem}"/>
         <!--<MenuItem Header="OBS..."></MenuItem>-->
+    </MenuItem>
+    <MenuItem Header="Programming">
+        <MenuItem Header="Programmer..." Command="{Binding OpenProgrammer.Command}"/>
+        <MenuItem Header="Profiles" ItemsSource="{Binding ProgrammerProfiles.Value}"
+                  ItemContainerStyle="{StaticResource SelectableMenuItem}"/>
     </MenuItem>
     <MenuItem Header="Debug">
         <MenuItem Header="Button Deck..." Command="{Binding TestButtonDeckCommand.Command}" />

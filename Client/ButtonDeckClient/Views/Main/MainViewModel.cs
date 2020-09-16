@@ -2,6 +2,7 @@
 using ButtonDeckClient.Logging;
 using ButtonDeckClient.Views.ButtonDeckTest;
 using ButtonDeckClient.Views.Logging;
+using ButtonDeckClient.Views.Programmer;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -14,8 +15,10 @@ namespace ButtonDeckClient.Views.Main
     class MainViewModel : PropertyChangedViewModel
     {
         public ViewModelProperty<IEnumerable<string>> SerialPorts { get; private set; }
+        public ViewModelProperty<IEnumerable<string>> ProgrammerProfiles { get; private set; }
         public ReadOnlyViewModelProperty<List<SerialPortMenuItem>> SerialPortMenuItems { get; private set; }
         public ViewModelProperty<string> CurrentSerialPort { get; private set; }
+        public ViewModelProperty<string> CurrentProgrammerProfile { get; private set; }
         private SerialMonitor SerialMonitor { get; }
         private ISettings Settings => Properties.Settings.Default;
         public ICommandModel TestButtonDeckCommand { get; }
@@ -25,11 +28,14 @@ namespace ButtonDeckClient.Views.Main
         private ButtonDeckCommunication Communication { get; }
         private ActionRouter ActionRouter { get; set; }
         private MainWindow MainWindow { get; }
+        public ICommandModel OpenProgrammer { get; }
 
         public MainViewModel(MainWindow mainWindow)
         {
             CurrentSerialPort = new ViewModelProperty<string>(ConnectToArduino);
+            CurrentProgrammerProfile = new ViewModelProperty<string>(LoadProfile);
             SerialPorts = new ViewModelProperty<IEnumerable<string>>();
+            ProgrammerProfiles = new ViewModelProperty<IEnumerable<string>>();
             SerialPortMenuItems = new ReadOnlyViewModelProperty<List<SerialPortMenuItem>>(SerialPorts, () =>
             {
                 var items = new List<SerialPortMenuItem>();
@@ -45,11 +51,24 @@ namespace ButtonDeckClient.Views.Main
             SerialMonitor = new SerialMonitor();
             TestButtonDeckCommand = new ActionCommandModel(() => !string.IsNullOrEmpty(CurrentSerialPort.Value), OnTestButtonDeck);
             LoggingCommand = new ActionCommandModel(() => true, OnOpenLogging);
+            OpenProgrammer = new ActionCommandModel(()=>true, OnOpenProgrammer);
 
             LogListener = new LogListener();
             RootLogger = new LoggerFactory().Create(LogListener);
             Communication = new ButtonDeckCommunication(RootLogger);
             MainWindow = mainWindow;
+        }
+
+        private void LoadProfile()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnOpenProgrammer()
+        {
+            var window = new ProgrammerWindow();
+            window.Owner = MainWindow;
+            window.ShowDialog();
         }
 
         private void OnOpenLogging()

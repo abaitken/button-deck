@@ -192,7 +192,12 @@
     <Compile Include="Views\Main\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Main\ProgrammerProfileMenuItem.cs" />
     <Compile Include="Views\Main\SerialPortMenuItem.cs" />
+    <Compile Include="Views\Programmer\ProgrammerViewModel.cs" />
+    <Compile Include="Views\Programmer\ProgrammerWindow.xaml.cs">
+      <DependentUpon>ProgrammerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PropertyChangedViewModel.cs" />
     <Compile Include="Views\ReadOnlyViewModelProperty.cs" />
     <Compile Include="Views\ViewModelProperty.cs" />
@@ -223,6 +228,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Main\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Programmer\ProgrammerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
