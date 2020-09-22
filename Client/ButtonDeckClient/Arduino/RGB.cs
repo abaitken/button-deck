@@ -1,6 +1,6 @@
 ﻿namespace ButtonDeckClient.Arduino
 {
-    struct RGB
+    public struct RGB
     {
         public RGB(byte r, byte g, byte b)
         {

@@ -8,7 +8,12 @@ using System.Threading.Tasks;
 
 namespace ButtonDeckClient.Arduino
 {
-    class ButtonDeckCommunication
+    public interface IButtonDeckCommunication
+    {
+        void SetLedColor(int index, RGB color);
+    }
+
+    class ButtonDeckCommunication : IButtonDeckCommunication
     {
         private readonly ILogger _logger;
         private SerialConnection _connection;

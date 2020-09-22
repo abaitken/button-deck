@@ -3,13 +3,13 @@ using OBS.WebSocket.NET;
 
 namespace ButtonDeckClient.Integrations.OBS
 {
+    [CommandDisplayName("OBS Start recording")]
+    [CommandCategory(CommandCategories.OBS)]
     public class StartRecording : Command
     {
-        public ObsWebSocketApi OBS { get; set; }
-
-        public override void Execute()
+        public override void Execute(ICommandContext commandContext)
         {
-            OBS.StartRecording();
+            commandContext.OBS.StartRecording();
         }
     }
 }

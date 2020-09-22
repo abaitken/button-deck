@@ -3,13 +3,13 @@ using OBS.WebSocket.NET;
 
 namespace ButtonDeckClient.Integrations.OBS
 {
+    [CommandDisplayName("OBS Stop recording")]
+    [CommandCategory(CommandCategories.OBS)]
     public class StopRecording : Command
     {
-        public ObsWebSocketApi OBS { get; set; }
-
-        public override void Execute()
+        public override void Execute(ICommandContext commandContext)
         {
-            OBS.StopRecording();
+            commandContext.OBS.StopRecording();
         }
     }
 }

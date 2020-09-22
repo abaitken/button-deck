@@ -2,7 +2,7 @@
 
 namespace ButtonDeckClient
 {
-    struct ButtonDeckInformation
+    public struct ButtonDeckInformation
     {
         public ButtonDeckInformation(int toggleSwitchCount, int pushButtonRows, int pushButtonCols, int[] statusLedIndexes, Mapping<ButtonPosition, int> pushButtonLedIndexes, Mapping<int, int> toggleSwitchLedIndexes)
         {
@@ -63,7 +63,7 @@ namespace ButtonDeckClient
             );
     }
 
-    struct ButtonPosition
+    public struct ButtonPosition
     {
         public ButtonPosition(int row, int column)
         {
@@ -75,7 +75,7 @@ namespace ButtonDeckClient
         public int Column { get; }
     }
 
-    class Mapping<T1, T2> : Dictionary<T1, T2>
+    public class Mapping<T1, T2> : Dictionary<T1, T2>
     {
     }
 }
