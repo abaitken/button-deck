@@ -35,8 +35,8 @@ namespace ButtonDeckClient
 
         private void Initialise()
         {
-            _toggleStates = new ToggleState[Deck.ToggleButtonCount];
-            for (int i = 0; i < Deck.ToggleButtonCount; i++)
+            _toggleStates = new ToggleState[Deck.ToggleSwitchCount];
+            for (int i = 0; i < Deck.ToggleSwitchCount; i++)
                 Communication.RequestToggleState(i);
         }
 
