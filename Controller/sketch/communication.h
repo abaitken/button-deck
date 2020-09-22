@@ -101,12 +101,11 @@ void ProcessMessage()
 
         for (; count > 0; count--)
         {
-            ledIndex = ReadNext();
+            ledIndex = ReadNext() + 1;
             r = ReadNext();
             g = ReadNext();
             b = ReadNext();
 
-            // Index 0 is the status light and cannot be changed
             if(ledIndex > 0)
                 SetLEDState(ledIndex, CRGB(r, g, b));
         }
