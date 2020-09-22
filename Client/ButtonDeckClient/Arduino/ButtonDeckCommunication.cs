@@ -10,6 +10,15 @@ namespace ButtonDeckClient.Arduino
 {
     public interface IButtonDeckCommunication
     {
+        event EventHandler<ButtonEventArgs> ButtonDown;
+        event EventHandler<ButtonEventArgs> ButtonUp;
+        event EventHandler<ToggleStateChangeEventArgs> ToggleStateChanged;
+        event EventHandler<LEDBrightnessEventArgs> LEDBrightness;
+        event EventHandler<VersionEventArgs> VersionResponse;
+        event EventHandler<HeartbeatEventArgs> HeartbeatResponse;
+        event EventHandler InvalidResponse;
+        event EventHandler AcknowledgedResponse;
+
         void SetLedColor(int index, RGB color);
     }
 

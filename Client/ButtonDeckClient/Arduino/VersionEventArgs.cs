@@ -2,7 +2,7 @@
 
 namespace ButtonDeckClient.Arduino
 {
-    internal class VersionEventArgs : EventArgs
+    public class VersionEventArgs : EventArgs
     {
         public VersionEventArgs(int version)
         {

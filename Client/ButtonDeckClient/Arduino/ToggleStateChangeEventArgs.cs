@@ -2,7 +2,7 @@
 
 namespace ButtonDeckClient.Arduino
 {
-    internal class ToggleStateChangeEventArgs : EventArgs
+    public class ToggleStateChangeEventArgs : EventArgs
     {
         public ToggleStateChangeEventArgs(int index, bool newState)
         {

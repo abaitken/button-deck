@@ -2,7 +2,7 @@
 
 namespace ButtonDeckClient.Arduino
 {
-    internal class HeartbeatEventArgs : EventArgs
+    public class HeartbeatEventArgs : EventArgs
     {
         public HeartbeatEventArgs(int value)
         {

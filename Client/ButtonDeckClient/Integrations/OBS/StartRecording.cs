@@ -1,5 +1,4 @@
 ﻿using ButtonDeckClient.Workflows;
-using OBS.WebSocket.NET;
 
 namespace ButtonDeckClient.Integrations.OBS
 {

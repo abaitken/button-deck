@@ -8,7 +8,6 @@ namespace ButtonDeckClient.Workflows
         ButtonDeckInformation ButtonDeckInformation { get; }
         IButtonDeckCommunication ButtonDeck { get; }
         ObsWebSocketApi OBS { get; }
-        // TODO : Current workflow
-        // TODO : Workflow source (button, toggle, another workflow?)
+        ObsWebSocket OBSWebSocket { get; }
     }
 }

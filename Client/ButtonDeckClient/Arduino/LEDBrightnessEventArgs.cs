@@ -2,7 +2,7 @@
 
 namespace ButtonDeckClient.Arduino
 {
-    internal class LEDBrightnessEventArgs : EventArgs
+    public class LEDBrightnessEventArgs : EventArgs
     {
         public LEDBrightnessEventArgs(int brightness)
         {

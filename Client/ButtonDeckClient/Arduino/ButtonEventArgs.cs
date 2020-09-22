@@ -2,7 +2,7 @@
 
 namespace ButtonDeckClient.Arduino
 {
-    internal class ButtonEventArgs : EventArgs
+    public class ButtonEventArgs : EventArgs
     {
         public ButtonEventArgs(int row, int column)
         {

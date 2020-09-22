@@ -160,13 +160,19 @@
     <Compile Include="Arduino\VersionEventArgs.cs" />
     <Compile Include="ButtonDeckInformation.cs" />
     <Compile Include="Integrations\BuiltIn\Delay.cs" />
+    <Compile Include="Integrations\BuiltIn\RunWorkflow.cs" />
+    <Compile Include="Integrations\ButtonDeck\PushButtonDownEvent.cs" />
+    <Compile Include="Integrations\ButtonDeck\PushButtonUpEvent.cs" />
     <Compile Include="Integrations\ButtonDeck\SetPushButtonLED.cs" />
     <Compile Include="Integrations\ButtonDeck\SetStatusLED.cs" />
     <Compile Include="Integrations\ButtonDeck\SetToggleSwitchLED.cs" />
+    <Compile Include="Integrations\ButtonDeck\ToggleStateChangedEvent.cs" />
     <Compile Include="Integrations\OBS\OBSConnection.cs" />
+    <Compile Include="Integrations\OBS\SceneChangedEvent.cs" />
     <Compile Include="Integrations\OBS\StartRecording.cs" />
     <Compile Include="Integrations\OBS\StopRecording.cs" />
     <Compile Include="Integrations\OBS\SwitchScene.cs" />
+    <Compile Include="Integrations\OBS\ToggleSourceVisibility.cs" />
     <Compile Include="Logging\EmptyLogger.cs" />
     <Compile Include="Logging\FormattingLogger.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
@@ -210,7 +216,11 @@
     <Compile Include="Workflows\CommandCategoryAttribute.cs" />
     <Compile Include="Workflows\CommandDisplayNameAttribute.cs" />
     <Compile Include="Workflows\CommandParameterAttribute.cs" />
+    <Compile Include="Workflows\Event.cs" />
     <Compile Include="Workflows\ICommandContext.cs" />
+    <Compile Include="Workflows\IEventContext.cs" />
+    <Compile Include="Workflows\Workflow.cs" />
+    <Compile Include="Workflows\WorkflowProfile.cs" />
     <Page Include="Views\ButtonDeckTest\ButtonDeckTestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
